@@ -12,8 +12,10 @@ return {
   lazy = false,
   keys = {
     { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
+    { '|', ':Neotree source=document_symbols<CR>', desc = 'NeoTree document_symbols', silent = true },
   },
   opts = {
+    sources = { 'filesystem', 'buffers', 'git_status', 'document_symbols' },
     filesystem = {
       window = {
         mappings = {
