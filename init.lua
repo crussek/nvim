@@ -93,6 +93,17 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+--  FIXME: use "os.getenv(...)" to hid secure info from repo
+--
+--
+-- DB connection(s)
+vim.g.dbs = {
+  riplocal = 'postgres://username:password@localhost:5432/ripdb',
+  ripprod = 'postgres://crussek:miqQA8TBh4d9CDeiMBUW@ripdb-prod.cqrmnp7y7ir9.us-east-1.rds.amazonaws.com:5432/ripdb',
+  ripstage = 'postgres://crussek:YNQHQ4BLc43vEFvJomVY@rip-stage-5.cz55rg6zh07h.us-east-1.rds.amazonaws.com:5432/ripdb',
+  ripstagedev = 'postgres://rip_dev:EkEfLq9dfvA8fWHZjfz5pNO@rip-stage-5.cz55rg6zh07h.us-east-1.rds.amazonaws.com:5432/ripdb',
+}
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
@@ -251,6 +262,8 @@ rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-dadbod',
+  'kristijanhusak/vim-dadbod-ui',
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -285,6 +298,10 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
     },
+  },
+  {
+    'kristijanhusak/vim-dadbod-completion',
+    ft = { 'sql', 'mysql', 'plsql' },
   },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
@@ -874,8 +891,10 @@ require('lazy').setup({
 
       sources = {
         default = { 'lsp', 'path', 'snippets', 'lazydev' },
+        per_filetype = { sql = { 'snippets', 'dadbod', 'lazydev' } },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+          dadbod = { module = 'vim_dadbod_completion.blink' },
         },
       },
 
