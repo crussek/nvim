@@ -102,6 +102,7 @@ vim.g.dbs = {
   ripprod = 'postgres://crussek:miqQA8TBh4d9CDeiMBUW@ripdb-prod.cqrmnp7y7ir9.us-east-1.rds.amazonaws.com:5432/ripdb',
   ripstage = 'postgres://crussek:YNQHQ4BLc43vEFvJomVY@rip-stage-5.cz55rg6zh07h.us-east-1.rds.amazonaws.com:5432/ripdb',
   ripstagedev = 'postgres://rip_dev:EkEfLq9dfvA8fWHZjfz5pNO@rip-stage-5.cz55rg6zh07h.us-east-1.rds.amazonaws.com:5432/ripdb',
+  ripuat = 'postgres://crussek:miqQA8TBh4d9CDeiMBUW@uat.cqrmnp7y7ir9.us-east-1.rds.amazonaws.com:5432/ripdb',
 }
 
 -- [[ Setting options ]]
