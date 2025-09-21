@@ -95,7 +95,6 @@ vim.g.have_nerd_font = true
 
 --  FIXME: use "os.getenv(...)" to hid secure info from repo
 --
---
 -- DB connection(s)
 vim.g.dbs = {
   riplocal = 'postgres://username:password@localhost:5432/ripdb',
@@ -276,8 +275,7 @@ rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-dadbod',
-  'kristijanhusak/vim-dadbod-ui',
+  'tpope/vim-fugitive',
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -314,8 +312,22 @@ require('lazy').setup({
     },
   },
   {
-    'kristijanhusak/vim-dadbod-completion',
-    ft = { 'sql', 'mysql', 'plsql' },
+    'kristijanhusak/vim-dadbod-ui',
+    dependencies = {
+      {
+        { 'tpope/vim-dadbod', lazy = true },
+        { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' } },
+      },
+    },
+    cmd = {
+      'DBUI',
+      'DBUIToggle',
+      'DBUIAddConnection',
+      'DBUIFindBuffer',
+    },
+    init = function()
+      vim.g.db_ui_use_nerd_fonts = 1
+    end,
   },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
