@@ -3,4 +3,6 @@ test.sh
 .luarc.json
 nvim
 
+local.lua
+
 spell/

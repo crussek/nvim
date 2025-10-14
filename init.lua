@@ -93,16 +93,11 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
---  FIXME: use "os.getenv(...)" to hid secure info from repo
---
--- DB connection(s)
-vim.g.dbs = {
-  riplocal = 'postgres://username:password@localhost:5432/ripdb',
-  ripprod = 'postgres://crussek:miqQA8TBh4d9CDeiMBUW@ripdb-prod.cqrmnp7y7ir9.us-east-1.rds.amazonaws.com:5432/ripdb',
-  ripstage = 'postgres://crussek:YNQHQ4BLc43vEFvJomVY@rip-stage-5.cz55rg6zh07h.us-east-1.rds.amazonaws.com:5432/ripdb',
-  ripstagedev = 'postgres://rip_dev:EkEfLq9dfvA8fWHZjfz5pNO@rip-stage-5.cz55rg6zh07h.us-east-1.rds.amazonaws.com:5432/ripdb',
-  ripuat = 'postgres://crussek:miqQA8TBh4d9CDeiMBUW@uat.cqrmnp7y7ir9.us-east-1.rds.amazonaws.com:5432/ripdb',
-}
+-- Load local configuration if exists
+local local_config = vim.fn.stdpath 'config' .. '/local.lua'
+if vim.fn.filereadable(local_config) == 1 then
+  dofile(local_config)
+end
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
