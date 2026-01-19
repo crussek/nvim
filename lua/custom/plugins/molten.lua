@@ -24,7 +24,6 @@ return {
     map('mv', ':<C-u>MoltenEvaluateVisual<CR>gv', 'Evaluate visual selection', 'v')
     map('md', ':MoltenDelete<CR>', 'Delete Molten cell')
     map('mo', ':MoltenShowOutput<CR>', 'Show output')
-    map('mo', ':MoltenShowOutput<CR>', 'Show output')
     map('mi', ':noautocmd MoltenEnterOutput<CR>', 'Enter or show output')
     map('mh', ':MoltenHideOutput<CR>', 'Hide output')
   end,
