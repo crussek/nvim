@@ -1,7 +1,7 @@
 return {
   'benlubas/molten-nvim',
   version = '^1.0.0',
-  dependecies = { '3rd/image.nvim' },
+  dependencies = { '3rd/image.nvim' },
   build = ':UpdateRemotePlugins',
   init = function()
     vim.g.molten_auto_open_output = false
