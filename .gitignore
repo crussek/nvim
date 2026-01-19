@@ -3,6 +3,7 @@ test.sh
 .luarc.json
 nvim
 
+# Machine-specific config overrides (loaded by init.lua if present)
 local.lua
 
 spell/
