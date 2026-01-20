@@ -50,10 +50,8 @@ require('lazy').setup({
   {
     'kristijanhusak/vim-dadbod-ui',
     dependencies = {
-      {
-        { 'tpope/vim-dadbod', lazy = true },
-        { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' } },
-      },
+      { 'tpope/vim-dadbod', lazy = true },
+      { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' } },
     },
     cmd = {
       'DBUI',
@@ -61,8 +59,31 @@ require('lazy').setup({
       'DBUIAddConnection',
       'DBUIFindBuffer',
     },
+    keys = {
+      { '<leader>db', '<cmd>DBUIToggle<cr>', desc = '[D]ata[b]ase UI toggle' },
+      { '<leader>da', '<cmd>DBUIAddConnection<cr>', desc = '[D]B [A]dd connection' },
+      { '<leader>df', '<cmd>DBUIFindBuffer<cr>', desc = '[D]B [F]ind buffer' },
+    },
     init = function()
+      -- UI settings
       vim.g.db_ui_use_nerd_fonts = 1
+      vim.g.db_ui_show_database_icon = 1
+      vim.g.db_ui_win_position = 'left'
+      vim.g.db_ui_winwidth = 40
+      vim.g.db_ui_show_help = 0
+      vim.g.db_ui_execute_on_save = 0
+      vim.g.db_ui_disable_mappings_sql = 1
+    end,
+    config = function()
+      -- SQL buffer keymaps (set up via autocmd for sql filetypes)
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = { 'sql', 'mysql', 'plsql' },
+        callback = function()
+          vim.keymap.set('n', '<leader>de', '<Plug>(DBUI_ExecuteQuery)', { buffer = true, desc = '[D]B [E]xecute query' })
+          vim.keymap.set('v', '<leader>de', '<Plug>(DBUI_ExecuteQuery)', { buffer = true, desc = '[D]B [E]xecute selection' })
+          vim.keymap.set('n', '<leader>dw', '<Plug>(DBUI_SaveQuery)', { buffer = true, desc = '[D]B [W]rite/save query' })
+        end,
+      })
     end,
   },
 
@@ -106,6 +127,7 @@ require('lazy').setup({
       },
       spec = {
         { '<leader>c', group = '[C]opilot' },
+        { '<leader>d', group = '[D]atabase' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
         { '<leader>s', group = '[S]earch' },
         { '<leader>t', group = '[T]oggle' },
